@@ -170,10 +170,10 @@ syntax match   jsFuncArgCommas        contained ','
 syntax keyword jsArguments            contained arguments
 syntax keyword jsForAwait             contained await skipwhite skipempty nextgroup=jsParenRepeat
 
-syntax match jsFuncAssignment        contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\s*=\s*([^()]*)\s*\(=>\)\@=/ skipwhite contains=jsFuncAssignmentPattern nextgroup=jsFuncAssignmentPattern
-syntax match jsFuncAssignment        contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\s*=\s*\k\+\s*\%(=>\)\@=/ skipwhite contains=jsFuncAssignmentPattern nextgroup=jsFuncAssignmentPattern
-syntax match jsFuncAssignmentPattern contained /=\s*([^()]*)\s*\(=>\)\@=/ skipwhite skipempty contains=jsArrowFuncArgs nextgroup=jsArrowFunction
-syntax match jsFuncAssignmentPattern contained /=\s*\k\+\s*\%(=>\)\@=/ skipwhite skipempty contains=jsArrowFuncArgs nextgroup=jsArrowFunction
+syntax match jsFuncAssignment        contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\s*=\s*\%(async\s*\)\?([^()]*)\s*\(=>\)\@=/ skipwhite contains=jsFuncAssignmentPattern,jsAsyncKeyword nextgroup=jsFuncAssignmentPattern
+syntax match jsFuncAssignment        contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\s*=\s*\%(async\s*\)\?\k\+\s*\%(=>\)\@=/ skipwhite contains=jsFuncAssignmentPattern,jsAsyncKeyword nextgroup=jsFuncAssignmentPattern
+syntax match jsFuncAssignmentPattern contained /=\s*\%(async\s*\)\?([^()]*)\s*\(=>\)\@=/ skipwhite skipempty contains=jsArrowFuncArgs,jsAsyncKeyword nextgroup=jsArrowFunction
+syntax match jsFuncAssignmentPattern contained /=\s*\%(async\s*\)\?\k\+\s*\%(=>\)\@=/ skipwhite skipempty contains=jsArrowFuncArgs,jsAsyncKeyword nextgroup=jsArrowFunction
 
 " Matches a single keyword argument with no parens
 syntax match   jsArrowFuncArgs  /\k\+\s*\%(=>\)\@=/ skipwhite contains=jsFuncArgs skipwhite skipempty nextgroup=jsArrowFunction extend
